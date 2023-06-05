@@ -113,6 +113,12 @@ dist
 # FuseBox cache
 .fusebox/
 
+#Ignore Lecture Notes
+/Lecture_notes
+
+#Ignore Discussions
+/Discussions
+
 # DynamoDB Local files
 .dynamodb/
 
