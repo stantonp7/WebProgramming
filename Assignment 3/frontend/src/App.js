@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import {HashRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import LoginUser from './components/login-user/LoginUser';
 import RegisterUser from './components/register-user/RegisterUser';
 import UserList from './components/user-list/UserList';
