@@ -1,0 +1,68 @@
+.SuccessModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SuccessModal__content{
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SuccessModal__content__title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.SuccessModal__content__button{
+    width: 100px;
+    height: 40px;
+    background-color: #2ecc71;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fade-appear {
+    opacity: 0;
+  }
+  
+  .fade-appear-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  
+  .fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }

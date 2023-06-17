@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.Section {
+    margin: 1rem 5rem;
+    border: 1px solid #ccc;
+}
+
+.FormField {
+  margin: 1rem 1rem;
+}
+.Submit{
+  margin: 5px 0px;
+}
