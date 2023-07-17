@@ -1,0 +1,229 @@
+tags:
+  - name: InRetrospect
+    description: InRetrospect API
+
+paths:
+  # [GET] Retrospectives
+  /Retrospectives:
+    get:
+      tags:
+        - Retrospectives
+      summary: Find All Retrospectives
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    # [POST] Retrospectives
+    post:
+      tags:
+        - Retrospectives
+      summary: Add Retrospective
+      parameters:
+        - name: body
+          in: body
+          description: Retrospective Data
+          required: true
+          schema:
+            $ref: '#/definitions/Retrospectives'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] Retrospectives/id
+  /Retrospectives/{id}:
+    get:
+      tags:
+        - Retrospectives
+      summary: Find Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [PUT] Retrospectives/id
+    put:
+      tags:
+        - Retrospectives
+      summary: Update Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+        - name: body
+          in: body
+          description: Retrospective Data
+          required: true
+          schema:
+            $ref: '#/definitions/Retrospectives'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [DELETE] Retrospectives/id
+    delete:
+      tags:
+        - Retrospectives
+      summary: Delete Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] Retrospective-Templates
+  /Retrospective-Templates:
+    get:
+      tags:
+        - Retrospective-Templates
+      summary: Find All Retrospective-Templates
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    # [POST] Retrospective-Templates
+    post:
+      tags:
+        - Retrospective-Templates
+      summary: Add Retrospective
+      parameters:
+        - name: body
+          in: body
+          description: Retrospective Data
+          required: true
+          schema:
+            $ref: '#/definitions/Retrospective-Templates'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] Retrospective-Templates/id
+  /Retrospective-Templates/{id}:
+    get:
+      tags:
+        - Retrospective-Templates
+      summary: Find Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [PUT] Retrospective-Templates/id
+    put:
+      tags:
+        - Retrospective-Templates
+      summary: Update Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+        - name: body
+          in: body
+          description: Retrospective Data
+          required: true
+          schema:
+            $ref: '#/definitions/Retrospective-Templates'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [DELETE] Retrospective-Templates/id
+    delete:
+      tags:
+        - Retrospective-Templates
+      summary: Delete Retrospective By Id
+      parameters:
+        - name: id
+          in: path
+          description: Retrospective Id
+          required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  Retrospectives:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        description: Retrospective Email
+      password:
+        type: string
+        description: Retrospective Password
+  Retrospective-Templates:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        description: Retrospective Email
+      password:
+        type: string
+        description: Retrospective Password
+
+schemes:
+  - https
+  - http
