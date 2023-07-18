@@ -1,20 +1,18 @@
 import { model, Schema, Document } from 'mongoose';
-import { RetrospectiveTemplate, RetrospectiveTempalteCol } from '../retrospective-template.interface';
+import { RetrospectiveTemplate,  RetrospectiveTemplateCol } from '../retrospective-template.interface';
 
 const RetrospectiveTempalteSchema: Schema = new Schema({
-  email: {
+  name: {
     type: String,
     required: true,
     unique: true,
   },
-  password: {
+  createdBy: {
     type: String,
-    required: true,
   },
   columns: {
-    type: Array<RetrospectiveTempalteCol>(),
+    type: Array<RetrospectiveTemplateCol>(),
   },
-
 });
 
-export const RetrospectiveTempalteModel = model<RetrospectiveTemplate & Document>('RetrospectiveTemplates', RetrospectiveTempalteSchema);
+export const RetrospectiveTemplateModel = model<RetrospectiveTemplate & Document>('RetrospectiveTemplates', RetrospectiveTempalteSchema);

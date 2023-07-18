@@ -214,15 +214,24 @@ definitions:
   Retrospective-Templates:
     type: object
     required:
-      - email
-      - password
+      - name
+      - columns
     properties:
-      email:
+      name:
         type: string
-        description: Retrospective Email
-      password:
-        type: string
-        description: Retrospective Password
+        description: Template Name
+      columns:
+        type: array
+        description: Template Columns
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Column Name
+            position:
+              type: integer
+              description: Column Position
 
 schemes:
   - https

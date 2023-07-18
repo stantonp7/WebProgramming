@@ -1,14 +1,12 @@
 export interface RetrospectiveTemplate {
     _id?: string;
-    email: string;
-    password: string;
-    createdBy: string;
+    name: string;
+    columns: Array<RetrospectiveTemplateCol>;
   }
   
-export interface RetrospectiveTempalteCol {
+export interface RetrospectiveTemplateCol {
     _id?: string;
     name: string;
     position: number;
-
   }
   

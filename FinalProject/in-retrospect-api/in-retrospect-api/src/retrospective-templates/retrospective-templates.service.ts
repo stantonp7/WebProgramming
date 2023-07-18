@@ -1,54 +1,49 @@
 import { hash } from 'bcrypt';
 import { Service } from 'typedi';
 import { HttpException } from '@exceptions/httpException';
-import { Retrospective } from '@/retrospectives/retrospective.interface';
-import { RetrospectiveModel } from '@/retrospectives/models/retrospective.model';
+import { RetrospectiveTemplate } from './retrospective-template.interface';
+import { RetrospectiveTemplateModel } from './models/retrospective-template.model';
+const uuid = require('uuid');
 
 @Service()
-export class RetrospectiveService {
-  public async findAllRetrospective(): Promise<Retrospective[]> {
-    const Retrospectives: Retrospective[] = await RetrospectiveModel.find();
-    return Retrospectives;
+export class RetrospectiveTemplateService {
+  public async findAllRetrospectiveTemplate(): Promise<RetrospectiveTemplate[]> {
+    const RetrospectiveTemplates: RetrospectiveTemplate[] = await RetrospectiveTemplateModel.find();
+    return RetrospectiveTemplates;
   }
 
-  public async findRetrospectiveById(RetrospectiveId: string): Promise<Retrospective> {
-    const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ _id: RetrospectiveId });
-    if (!findRetrospective) throw new HttpException(409, "Retrospective doesn't exist");
+  public async findRetrospectiveTemplateById(RetrospectiveTemplateId: string): Promise<RetrospectiveTemplate> {
+    const findRetrospectiveTemplate: RetrospectiveTemplate = await RetrospectiveTemplateModel.findOne({ _id: RetrospectiveTemplateId });
+    if (!findRetrospectiveTemplate) throw new HttpException(409, "RetrospectiveTemplate doesn't exist");
 
-    return findRetrospective;
+    return findRetrospectiveTemplate;
   }
 
-  public async createRetrospective(RetrospectiveData: Retrospective): Promise<Retrospective> {
-    const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ email: RetrospectiveData.email });
-    if (findRetrospective) throw new HttpException(409, `This email ${RetrospectiveData.email} already exists`);
+  public async createRetrospectiveTemplate(RetrospectiveTemplateData: RetrospectiveTemplate): Promise<RetrospectiveTemplate> {
+    const findRetrospectiveTemplate: RetrospectiveTemplate = await RetrospectiveTemplateModel.findOne({ name: RetrospectiveTemplateData.name });
+    if (findRetrospectiveTemplate) throw new HttpException(409, `This template ${RetrospectiveTemplateData.name} already exists`);
+    const createRetrospectiveTemplateData: RetrospectiveTemplate = await RetrospectiveTemplateModel.create({ ...RetrospectiveTemplateData});
 
-    const hashedPassword = await hash(RetrospectiveData.password, 10);
-    const createRetrospectiveData: Retrospective = await RetrospectiveModel.create({ ...RetrospectiveData, password: hashedPassword });
-
-    return createRetrospectiveData;
+    return createRetrospectiveTemplateData;
   }
 
-  public async updateRetrospective(RetrospectiveId: string, RetrospectiveData: Retrospective): Promise<Retrospective> {
-    if (RetrospectiveData.email) {
-      const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ email: RetrospectiveData.email });
-      if (findRetrospective && findRetrospective._id != RetrospectiveId) throw new HttpException(409, `This email ${RetrospectiveData.email} already exists`);
+  public async updateRetrospectiveTemplate(RetrospectiveTemplateId: string, RetrospectiveTemplateData: RetrospectiveTemplate): Promise<RetrospectiveTemplate> {
+    console.log(RetrospectiveTemplateData);
+    if (RetrospectiveTemplateData.name) {
+      const findRetrospectiveTemplate: RetrospectiveTemplate = await RetrospectiveTemplateModel.findOne({ name: RetrospectiveTemplateData.name });
+      if (findRetrospectiveTemplate && findRetrospectiveTemplate._id != RetrospectiveTemplateId) throw new HttpException(409, `This template ${RetrospectiveTemplateData.name} already exists`);
     }
 
-    if (RetrospectiveData.password) {
-      const hashedPassword = await hash(RetrospectiveData.password, 10);
-      RetrospectiveData = { ...RetrospectiveData, password: hashedPassword };
-    }
+    const updateRetrospectiveTemplateById: RetrospectiveTemplate = await RetrospectiveTemplateModel.findByIdAndUpdate(RetrospectiveTemplateId, RetrospectiveTemplateData, {new: true} );
+    if (!updateRetrospectiveTemplateById) throw new HttpException(409, "RetrospectiveTemplate doesn't exist");
 
-    const updateRetrospectiveById: Retrospective = await RetrospectiveModel.findByIdAndUpdate(RetrospectiveId, { RetrospectiveData });
-    if (!updateRetrospectiveById) throw new HttpException(409, "Retrospective doesn't exist");
-
-    return updateRetrospectiveById;
+    return updateRetrospectiveTemplateById;
   }
 
-  public async deleteRetrospective(RetrospectiveId: string): Promise<Retrospective> {
-    const deleteRetrospectiveById: Retrospective = await RetrospectiveModel.findByIdAndDelete(RetrospectiveId);
-    if (!deleteRetrospectiveById) throw new HttpException(409, "Retrospective doesn't exist");
+  public async deleteRetrospectiveTemplate(RetrospectiveTemplateId: string): Promise<RetrospectiveTemplate> {
+    const deleteRetrospectiveTemplateById: RetrospectiveTemplate = await RetrospectiveTemplateModel.findByIdAndDelete(RetrospectiveTemplateId);
+    if (!deleteRetrospectiveTemplateById) throw new HttpException(409, "RetrospectiveTemplate doesn't exist");
 
-    return deleteRetrospectiveById;
+    return deleteRetrospectiveTemplateById;
   }
 }

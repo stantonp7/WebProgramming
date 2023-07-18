@@ -1,61 +1,61 @@
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
-import { Retrospective } from '@/retrospectives/retrospective.interface';
-import { RetrospectiveService } from './retrospective-templates.service';
+import { RetrospectiveTemplateService } from './retrospective-templates.service';
+import { RetrospectiveTemplate } from './retrospective-template.interface';
 
-export class RetrospectiveController {
-  public Retrospective = Container.get(RetrospectiveService);
+export class RetrospectiveTemplateController {
+  public RetrospectiveTemplate = Container.get(RetrospectiveTemplateService);
 
-  public getRetrospectives = async (req: Request, res: Response, next: NextFunction) => {
+  public getRetrospectiveTemplates = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllRetrospectivesData: Retrospective[] = await this.Retrospective.findAllRetrospective();
+      const findAllRetrospectiveTemplatesData: RetrospectiveTemplate[] = await this.RetrospectiveTemplate.findAllRetrospectiveTemplate();
 
-      res.status(200).json({ data: findAllRetrospectivesData, message: 'findAll' });
+      res.status(200).json({ data: findAllRetrospectiveTemplatesData, message: 'findAll' });
     } catch (error) {
       next(error);
     }
   };
 
-  public getRetrospectiveById = async (req: Request, res: Response, next: NextFunction) => {
+  public getRetrospectiveTemplateById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const RetrospectiveId: string = req.params.id;
-      const findOneRetrospectiveData: Retrospective = await this.Retrospective.findRetrospectiveById(RetrospectiveId);
+      const RetrospectiveTemplateId: string = req.params.id;
+      const findOneRetrospectiveTemplateData: RetrospectiveTemplate = await this.RetrospectiveTemplate.findRetrospectiveTemplateById(RetrospectiveTemplateId);
 
-      res.status(200).json({ data: findOneRetrospectiveData, message: 'findOne' });
+      res.status(200).json({ data: findOneRetrospectiveTemplateData, message: 'findOne' });
     } catch (error) {
       next(error);
     }
   };
 
-  public createRetrospective = async (req: Request, res: Response, next: NextFunction) => {
+  public createRetrospectiveTemplate = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const RetrospectiveData: Retrospective = req.body;
-      const createRetrospectiveData: Retrospective = await this.Retrospective.createRetrospective(RetrospectiveData);
+      const RetrospectiveTemplateData: RetrospectiveTemplate = req.body;
+      const createRetrospectiveTemplateData: RetrospectiveTemplate = await this.RetrospectiveTemplate.createRetrospectiveTemplate(RetrospectiveTemplateData);
 
-      res.status(201).json({ data: createRetrospectiveData, message: 'created' });
+      res.status(201).json({ data: createRetrospectiveTemplateData, message: 'created' });
     } catch (error) {
       next(error);
     }
   };
 
-  public updateRetrospective = async (req: Request, res: Response, next: NextFunction) => {
+  public updateRetrospectiveTemplate = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const RetrospectiveId: string = req.params.id;
-      const RetrospectiveData: Retrospective = req.body;
-      const updateRetrospectiveData: Retrospective = await this.Retrospective.updateRetrospective(RetrospectiveId, RetrospectiveData);
+      const RetrospectiveTemplateId: string = req.params.id;
+      const RetrospectiveTemplateData: RetrospectiveTemplate = req.body;
+      const updateRetrospectiveTemplateData: RetrospectiveTemplate = await this.RetrospectiveTemplate.updateRetrospectiveTemplate(RetrospectiveTemplateId, RetrospectiveTemplateData);
 
-      res.status(200).json({ data: updateRetrospectiveData, message: 'updated' });
+      res.status(200).json({ data: updateRetrospectiveTemplateData, message: 'updated' });
     } catch (error) {
       next(error);
     }
   };
 
-  public deleteRetrospective = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteRetrospectiveTemplate = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const RetrospectiveId: string = req.params.id;
-      const deleteRetrospectiveData: Retrospective = await this.Retrospective.deleteRetrospective(RetrospectiveId);
+      const RetrospectiveTemplateId: string = req.params.id;
+      const deleteRetrospectiveTemplateData: RetrospectiveTemplate = await this.RetrospectiveTemplate.deleteRetrospectiveTemplate(RetrospectiveTemplateId);
 
-      res.status(200).json({ data: deleteRetrospectiveData, message: 'deleted' });
+      res.status(200).json({ data: deleteRetrospectiveTemplateData, message: 'deleted' });
     } catch (error) {
       next(error);
     }

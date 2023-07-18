@@ -7,9 +7,6 @@ export class CreateRetrospectiveDTO {
   @MinLength(3)
   public name: string;
 
-  @IsNumber()
-  public position: number;
-
   @IsString()
   @IsNotEmpty()
   public templateID: string;
