@@ -19,27 +19,21 @@ export class RetrospectiveService {
   }
 
   public async createRetrospective(RetrospectiveData: Retrospective): Promise<Retrospective> {
-    const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ email: RetrospectiveData.email });
-    if (findRetrospective) throw new HttpException(409, `This email ${RetrospectiveData.email} already exists`);
+    const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ name: RetrospectiveData.name });
+    if (findRetrospective) throw new HttpException(409, `This retrospective ${RetrospectiveData.name} already exists`);
 
-    const hashedPassword = await hash(RetrospectiveData.password, 10);
-    const createRetrospectiveData: Retrospective = await RetrospectiveModel.create({ ...RetrospectiveData, password: hashedPassword });
+    const createRetrospectiveData: Retrospective = await RetrospectiveModel.create({ ...RetrospectiveData });
 
     return createRetrospectiveData;
   }
 
   public async updateRetrospective(RetrospectiveId: string, RetrospectiveData: Retrospective): Promise<Retrospective> {
-    if (RetrospectiveData.email) {
-      const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ email: RetrospectiveData.email });
-      if (findRetrospective && findRetrospective._id != RetrospectiveId) throw new HttpException(409, `This email ${RetrospectiveData.email} already exists`);
+    if (RetrospectiveData.name) {
+      const findRetrospective: Retrospective = await RetrospectiveModel.findOne({ name: RetrospectiveData.name });
+      if (findRetrospective && findRetrospective._id != RetrospectiveId) throw new HttpException(409, `This name ${RetrospectiveData.name} already exists`);
     }
 
-    if (RetrospectiveData.password) {
-      const hashedPassword = await hash(RetrospectiveData.password, 10);
-      RetrospectiveData = { ...RetrospectiveData, password: hashedPassword };
-    }
-
-    const updateRetrospectiveById: Retrospective = await RetrospectiveModel.findByIdAndUpdate(RetrospectiveId, { RetrospectiveData });
+    const updateRetrospectiveById: Retrospective = await RetrospectiveModel.findByIdAndUpdate(RetrospectiveId,  RetrospectiveData );
     if (!updateRetrospectiveById) throw new HttpException(409, "Retrospective doesn't exist");
 
     return updateRetrospectiveById;

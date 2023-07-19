@@ -1,8 +1,9 @@
 export interface Retrospective {
     _id?: string;
-    email: string;
-    password: string;
+    name: string;
     createdBy: string;
+    columns: [RetrospectiveCol];
+    comments: [RetrospectiveComment];
   }
   
 export interface RetrospectiveCol {
