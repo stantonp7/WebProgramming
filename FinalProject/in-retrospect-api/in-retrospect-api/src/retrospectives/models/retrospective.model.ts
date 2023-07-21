@@ -12,7 +12,6 @@ const RetrospectiveSchema: Schema = new Schema({
   },
   templateID: {
     type: String,
-    required: true,
   },
   columns: {
     type: Array<RetrospectiveCol>(),
